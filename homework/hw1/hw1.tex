@@ -50,36 +50,76 @@ contents of $B$; thus $A$ is also a subset of $B$.
     Show that $\N \times \N$ is countably infinite.
 \end{quote}
 
+Note that the following are equivalent\footnote{c.f. Theorem 7.1 in Munkres' Topology} given a
+nonempty set $B$.
+\begin{enumerate}
+    \item $B$ is countable.
+    \item There is a surjective function $f : \N \to B$
+    \item There is an injective function $g : B \to \N$
+\end{enumerate}
+The proof strategy is to show that $(1) \Rightarrow (2) \Rightarrow (3) \Rightarrow (1)$.
+
+We will proceed by using $(3)$ and finding an injective map $f : \N \times \N \to \N$. This ia a
+more verbose form of a proof that appeared on a certain topology exam last semester.
+
 \begin{proof}
-    Consider the ordering\todo{This proof was done in topology. Refer for ideas.}{} of $\N \times \N$ given in
-    \autoref{fig:cross-ordering}.
-
-    \begin{figure}[h]
-        \centering
-        \begin{tikzpicture}[>=stealth, node distance=1.5cm]
-            \node (00) {$(0, 0)$};
-            \node[right of=00] (10) {$(1, 0)$};
-            \node[right of=10] (20) {$(2, 0)$};
-            \node[right of=20] (30) {$(3, 0)$};
-
-            \node[below of=00] (01) {$(0, 1)$};
-            \node[below of=10] (11) {$(1, 1)$};
-            \node[below of=20] (21) {$(2, 1)$};
-            \node[below of=01] (02) {$(0, 2)$};
-            \node[below of=11] (12) {$(1, 2)$};
-            \node[below of=02] (03) {$(0, 3)$};
-
-            \node[right of=12] {$\ddots$};
-
-            % Draw the ordering
-            \draw[->] (00) edge (10) (10) edge (01) (01) edge (20) (20) edge
-            (11)
-            (11) edge (02) (02) edge (30) (30) edge (21) (21) edge (12) (12)
-            edge (03);
-        \end{tikzpicture}
-        \caption{The ordering of $\N \times \N$}\label{fig:cross-ordering}
-    \end{figure}
+    For the seeming sheer hell of it, define $f : \N \times \N \to \N$ by
+    \[f(n, m) = 2^n 3^m\]
+    We wish to show that $f$ is injective. So by way of contradiction, suppose that $f$ is not
+    injective. That is, suppose $2^n3^m = 2^p3^q$ with $n \neq p$ and $m \neq q$. There are two
+    ways that $n \neq p$, so we proceed by cases.
+    \begin{itemize}
+        \item[\textbf{case $(n < p)$:}] Then $3^m = 2^{p - n}3^q$, which implies that $3^m$ is
+              even, a contradiction.
+        \item[\textbf{case $(n > p)$:}] Then $3^q = 2^{n - p}3^m$, which implies that $3^q$ is
+              even, a contradiction.
+    \end{itemize}
+    Thus $n = p$. But then $3^q = 3^m$. There are two ways that $m \neq q$, so we proceed by cases.
+    \begin{itemize}
+        \item[\textbf{case $(m < q)$:}] But then $1 = 3^{q - m}$, which implies that $q - m = 0$,
+              or rather that $m = q$, a contradiction.
+        \item[\textbf{case $(m > q)$:}] But then $q = e^{m - q}$, which implies that $m - q = 0$,
+              or rather that $q = m$, a contradiction.
+    \end{itemize}
+    Thus $n = p$ and $m = q$, a contradiction. Therefore $f$ is injective and $\N \times \N$ is
+    countable.
 \end{proof}
+
+An alternate proof method more aligned with the techniques discussed in class would make use of a
+classic diagonalization argument using the \textit{Cantor pairing
+    function}\footnote{\url{https://en.wikipedia.org/wiki/Pairing_function}} shown in
+\autoref{fig:cross-ordering}
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[>=stealth, node distance=1.5cm]
+        \node (00) {$(0, 0)$};
+        \node[right of=00] (10) {$(1, 0)$};
+        \node[right of=10] (20) {$(2, 0)$};
+        \node[right of=20] (30) {$(3, 0)$};
+
+        \node[below of=00] (01) {$(0, 1)$};
+        \node[below of=10] (11) {$(1, 1)$};
+        \node[below of=20] (21) {$(2, 1)$};
+        \node[below of=01] (02) {$(0, 2)$};
+        \node[below of=11] (12) {$(1, 2)$};
+        \node[below of=02] (03) {$(0, 3)$};
+
+        \node[right of=12] {$\ddots$};
+
+        % Draw the ordering
+        \draw[->] (00) edge (10) (10) edge (01) (01) edge (20) (20) edge
+        (11) (11) edge (02) (02) edge (30) (30) edge (21) (21) edge (12)
+        (12) edge (03);
+    \end{tikzpicture}
+    \caption{The Cantor pairing function}\label{fig:cross-ordering}
+\end{figure}
+
+and defined by
+\[f(n, m) = \frac{1}{2}(n + m)(n + m + 1) + m\]
+with inverse
+\[f^{-1}(z) = \begin{cases}y = z - \frac{w^2 + w}{2}\\ x = w - y\end{cases}\]
+where $\displaystyle w = \floor*{\frac{\sqrt{8z + 1} - 1}{2}}$. The proof that $f$ is a bijection
+is quite tedious, so I prefer the proof given above.
 
 \section{}
 \begin{quote}
