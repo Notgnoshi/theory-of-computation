@@ -28,7 +28,7 @@
 \usepackage{titling}
 \usepackage{textcomp}
 \usepackage{tikz}
-\usepackage{titlesec}
+\usepackage[compact, explicit]{titlesec}
 \usepackage{textcomp}
 \usepackage[nottoc]{tocbibind}
 \usepackage[textsize=small]{todonotes}
@@ -106,3 +106,7 @@
 % Use \ceil*{} or \floor*{}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+% make each \section a problem.
+\titleformat{\section}[runin]{\large\bfseries}{}{0pt}{\titlerule[1.5pt]\newline\vspace*{-4pt}
+Problem\quad\thesection\newline}[\vspace{0.01ex}{\titlerule[1.5pt]}]
