@@ -46,6 +46,30 @@ contents of $B$; thus $A$ is also a subset of $B$.
     \[ sum(m + n) = sum(m) + sum(n) + nm \]
 \end{quote}
 
+\begin{proof}
+    We proceed by induction on two variables $m$, and $n$.
+    \begin{itemize}
+        \item[\textbf{Base Case:}] Clearly,
+              \[sum(1 + n) = sum(1) + sum(n) + 1 \cdot n = sum(n) + (n + 1)\]
+        \item[\textbf{Hypothesis:}] Assume $m > 1$ and that
+              \[sum(m + n) = sum(m) + sum(n) + mn\]
+              for all $m \leq n$.
+        \item[\textbf{Induction:}] Now consider $sum(m + 1 + n)$. We wish to show that
+              \[sum(m + 1 + n) = sum(m + n) + (m + n + 1)\]
+              So consider,
+              \begin{align*}
+                  sum(m + 1 + n) & = sum((m + 1) + n)                     \\
+                                 & = sum(m + 1) + sum(n) + (m + 1)n       \\
+                                 & = sum(m) + (m + 1) + sum(n) + (m + 1)n \\
+                                 & = sum(m) + sum(n) + (m + 1)(n + 1)     \\
+                                 & = sum(m) + sum(n) + mn + m + n + 1     \\
+                                 & = sum(m + n) + (m + n + 1)
+              \end{align*}
+              Thus, by induction, we have that
+              \[sum(m + n) = sum(m) + sum(n) + nm\]
+    \end{itemize}
+\end{proof}
+
 \section{}
 \begin{quote}
     Show that $\N \times \N$ is countably infinite.
