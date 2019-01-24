@@ -202,5 +202,16 @@ is quite tedious, so I prefer the proof given above.
         powers method}.
 \end{quote}
 
-\todoinline{Finish.}
+The prime factorization
+% \begin{noindent} (disable latexindent)
+method\footnote{\url{https://en.wikipedia.org/wiki/Hilbert\%27s_paradox_of_the_Grand_Hotel\#Prime_factorization_method}} puts person in seat $s$ on bus $b$ in room $2^s3^b$.
+% \end{noindent}
+
+\begin{proof}
+    Suppose by way of contradiction that two distinct persons get placed into the same room. That
+    is, suppose that $2^s3^b = 2^t3^c$ for $s \neq t$ or $b \neq c$. However, note that $2^s3^b$
+    and $2^t3^c$ are distinct prime factorizations of the same integer (the room number). This is a
+    contradiction, because every integer has exactly one prime factorization unique up to ordering.
+    Thus two distinct persons will not be placed into the same room.
+\end{proof}
 \end{document}
