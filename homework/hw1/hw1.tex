@@ -21,6 +21,16 @@ This holds if the two sets are disjoint, or if one or both are empty.
     Show that $S_1 \cup S_2 = \overline{\overline{S_1} \cap \overline{S_2}}$
 \end{quote}
 
+\begin{proof}
+    This is a classic set equality proof.
+    \begin{itemize}
+        \item[$\lbrack\subset\rbrack$] Suppose $x \in S_1 \cup S_2$. We wish to show that $x \in
+                  \overline{\overline{S_1} \cap \overline{S_2}}$.
+        \item[$\lbrack\supset\rbrack$] Suppose $x \in \overline{\overline{S_1} \cap
+                      \overline{S_2}}$. We wish to show that $x \in S_1 \cup S_2$.
+    \end{itemize}
+\end{proof}
+
 \todoinline{Finish.}
 
 \section{}
@@ -31,7 +41,29 @@ This holds if the two sets are disjoint, or if one or both are empty.
     \[F_0 + F_1 + \cdots + F_n = F_{n + 2} - 1\]
 \end{quote}
 
-\todoinline{Finish.}
+\begin{proof}
+    We proceed by induction.
+    \begin{itemize}
+        \item[\textbf{Base Case:}] We have that
+              \[F_0 = 0,\quad F_1 = 1,\quad F_2 = F_0 + F_1 = 1\]
+              but note that
+              \[F_0 = F_2 - 1 = 1 - 1 = 0\]
+              thus the base case holds.
+        \item[\textbf{Hypothesis:}] Assume that
+              \[F_0 + F_1 + \cdots + F_n = F_{n + 2} - 1\]
+        \item[\textbf{Induction:}] Show that
+              \[F_0 + F_1 + \cdots + F_n + F_{n + 1} = F_{(n + 1) + 2} - 1\]
+              so consider,
+              \begin{align*}
+                  F_0 + F_1 + \cdots + F_n + F_{n + 1} & = (F_{n + 2} - 1) + F_{n + 1} \\
+                                                       & = (F_{n + 1} + F_{n + 2}) - 1 \\
+                                                       & = F_{n + 3} - 1               \\
+                                                       & = F_{(n + 2) + 1}
+              \end{align*}
+              Thus, by induction,
+              \[F_0 + F_1 + \cdots + F_n = F_{n + 2} - 1\]
+    \end{itemize}
+\end{proof}
 
 \section{}
 \begin{quote}
