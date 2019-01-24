@@ -26,12 +26,19 @@ This holds if the two sets are disjoint, or if one or both are empty.
     \begin{itemize}
         \item[$\lbrack\subset\rbrack$] Suppose $x \in S_1 \cup S_2$. We wish to show that $x \in
                   \overline{\overline{S_1} \cap \overline{S_2}}$.
+
+              Since $x \in S_1 \cup S_2$, we have that $x \in S_1$ or $x \in S_2$. Using
+              DeMorgan's laws, this means that $x \notin \overline{S_1}$ and
+              $x \notin \overline{S_2}$, or rather $x \notin \overline{S_1} \cap \overline{S_2}$,
+              that is, $x \in \overline{\overline{S_1} \cap \overline{S_2}}$.
         \item[$\lbrack\supset\rbrack$] Suppose $x \in \overline{\overline{S_1} \cap
                       \overline{S_2}}$. We wish to show that $x \in S_1 \cup S_2$.
+
+              We have that $x \notin \overline{S_1} \cap \overline{S_2}$, that is, $x \notin
+                  \overline{S_1}$ and $x \notin \overline{S_2}$, or, using DeMorgan's laws,
+              $x \in S_1$ or $x \in S_2$, that is, $x \in S_1 \cup S_2$.
     \end{itemize}
 \end{proof}
-
-\todoinline{Finish.}
 
 \section{}
 \begin{quote}
