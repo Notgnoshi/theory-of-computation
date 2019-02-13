@@ -47,7 +47,7 @@
            texcomments,  % Enable latex code inside of comments. Useful for referencing equations.
     }
 
-\usetikzlibrary{arrows, shapes, positioning}
+\usetikzlibrary{arrows, automata, shapes, positioning}
 \pgfplotsset{compat=1.16}
 \numberwithin{equation}{section}
 % Sets the width of the margin TODO notes
@@ -106,6 +106,10 @@
 % Use \ceil*{} or \floor*{}
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\AtBeginDocument{%
+\renewcommand{\sectionautorefname}{Problem}
+}
 
 % make each \section a problem.
 \titleformat{\section}[runin]{\large\bfseries}{}{0pt}{\titlerule[1.5pt]\newline\vspace*{-4pt}
