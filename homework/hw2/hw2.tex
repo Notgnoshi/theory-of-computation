@@ -1,0 +1,92 @@
+\documentclass{article}
+\input{../homework.sty}
+
+\title{Homework 2}
+\author{Austin Gill}
+\date{February 15, 2019}
+
+\begin{document}
+\maketitle
+
+\section{}
+\begin{quote}
+    Let $\Sigma = \{a, b\}$ and $L = \{aa, bb\}$. Describe $\overline L$ with set notation.
+\end{quote}
+
+\section{}
+\begin{quote}
+    Find a grammar for the language $L = \{ a^n \mid n \in 2\N \}$
+\end{quote}
+
+\section{}
+\begin{quote}
+    What language does the grammar with these productions generate?
+    \begin{align*}
+        S & \to Aa \\
+        A & \to B  \\
+        B & \to Aa
+    \end{align*}
+\end{quote}
+
+\section{}
+\begin{quote}
+    Find a regular expression over the alphabet $\{0, 1\}$ to describe all bitstrings without
+    leading zeros (except for 0 itself). So the language is the set
+    \[ \{0, 1, 10, 11, 100, \dots \} \]
+\end{quote}
+
+\section{}\label{prob:5}
+\begin{quote}
+    Find the quintuple for the DFA in \autoref{fig:5:dfa}.
+\end{quote}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[
+            ->,
+            > = stealth,
+            shorten > = 1pt,
+            auto,
+            node distance = 2.8cm,
+            on grid,
+            semithick
+        ]
+
+        \node[state, initial] (q0) {$q_0$};
+        \node[state, right of=q0] (q1) {$q_1$};
+        \node[state, accepting, above right of=q1] (q3) {$q_3$};
+        \node[state, accepting, below right of=q1] (q2) {$q_2$};
+
+        % \begin{noindent}
+        \path (q0) edge[loop above]    node        {$b$} (q0)
+                   edge                node        {$a$} (q1)
+              (q1) edge                node        {$a$} (q3)
+                   edge[bend left=15]  node        {$b$} (q2)
+              (q2) edge[bend left=15]  node        {$a$} (q1)
+                   edge[bend right=10] node[right] {$b$} (q3)
+              (q3) edge[bend right=10] node[left]  {$a$} (q2)
+                   edge[loop above]    node        {$b$} (q3);
+        % \end{noindent}
+    \end{tikzpicture}
+    \caption{The DFA for \autoref{prob:5}}\label{fig:5:dfa}
+\end{figure}
+
+\section{}
+\begin{quote}
+    Give a regular expression for the language
+    \[L = \{a^n b^m \mid n < 4, m \leq 4\} \]
+\end{quote}
+
+\section{}
+\begin{quote}
+    Describe the language for the regular expressions
+    \begin{enumerate}
+        \item $a + b$
+        \item $a + b^*$
+        \item $ab^* + bc^*$
+    \end{enumerate}
+    Construct an NFA for the regular expression
+    \[r = {(a + b)}^*\]
+\end{quote}
+
+\end{document}
