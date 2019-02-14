@@ -13,10 +13,20 @@
     Let $\Sigma = \{a, b\}$ and $L = \{aa, bb\}$. Describe $\overline L$ with set notation.
 \end{quote}
 
+Recall that $\overline L = \Sigma^* \setminus L$. Here, $\Sigma^*$ is the set of all strings formed
+from $a$ and $b$, including the empty string $\lambda$. Thus $\overline L = \big \{w \in \Sigma^*
+    \mid w \notin \{aa, bb\} \big \}$.
+
 \section{}
 \begin{quote}
     Find a grammar for the language $L = \{ a^n \mid n \in 2\N \}$
 \end{quote}
+
+Clearly, $G = \big(\{S\}, \{a\}, S, P\big)$. The production rules $P$, are then
+\begin{align*}
+    S & \to aS      \\
+    S & \to \lambda
+\end{align*}
 
 \section{}
 \begin{quote}
@@ -27,6 +37,13 @@
         B & \to Aa
     \end{align*}
 \end{quote}
+
+First, we have $G = \big(\{S, A, B\}, \{a\}, S, P\big)$. Second, note that none of the above
+production rules result in a terminal symbol. This means there are no strings that are accepted by
+the grammar. Thus the language $L(G) = \emptyset$.
+
+Either that or the language consists of one single element, an infinite string of $a$'s. But this
+disagrees with my current understanding that languages only contain finite strings.
 
 \section{}
 \begin{quote}
