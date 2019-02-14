@@ -54,41 +54,39 @@ disagrees with my current understanding that languages only contain finite strin
 
 \[ 0 + 1 \cdot {(0 + 1)}^*\]
 
-\section{}\label{prob:5}
+\section{}
 \begin{quote}
-    Find the quintuple for the DFA in \autoref{fig:5:dfa}.
+    Find the quintuple for the DFA below.
+
+    \begin{center}
+        \begin{tikzpicture}[
+                ->,
+                > = stealth,
+                shorten > = 1pt,
+                auto,
+                node distance = 2.8cm,
+                on grid,
+                semithick
+            ]
+
+            \node[state, initial] (q0) {$q_0$};
+            \node[state, right of=q0] (q1) {$q_1$};
+            \node[state, accepting, above right of=q1] (q3) {$q_3$};
+            \node[state, accepting, below right of=q1] (q2) {$q_2$};
+
+            % \begin{noindent}
+            \path (q0) edge[loop above]    node        {$b$} (q0)
+                       edge                node        {$a$} (q1)
+                  (q1) edge                node        {$a$} (q3)
+                       edge[bend left=15]  node        {$b$} (q2)
+                  (q2) edge[bend left=15]  node        {$a$} (q1)
+                       edge[bend right=10] node[right] {$b$} (q3)
+                  (q3) edge[bend right=10] node[left]  {$a$} (q2)
+                       edge[loop above]    node        {$b$} (q3);
+            % \end{noindent}
+        \end{tikzpicture}
+    \end{center}
 \end{quote}
-
-\begin{figure}[h]
-    \centering
-    \begin{tikzpicture}[
-            ->,
-            > = stealth,
-            shorten > = 1pt,
-            auto,
-            node distance = 2.8cm,
-            on grid,
-            semithick
-        ]
-
-        \node[state, initial] (q0) {$q_0$};
-        \node[state, right of=q0] (q1) {$q_1$};
-        \node[state, accepting, above right of=q1] (q3) {$q_3$};
-        \node[state, accepting, below right of=q1] (q2) {$q_2$};
-
-        % \begin{noindent}
-        \path (q0) edge[loop above]    node        {$b$} (q0)
-                   edge                node        {$a$} (q1)
-              (q1) edge                node        {$a$} (q3)
-                   edge[bend left=15]  node        {$b$} (q2)
-              (q2) edge[bend left=15]  node        {$a$} (q1)
-                   edge[bend right=10] node[right] {$b$} (q3)
-              (q3) edge[bend right=10] node[left]  {$a$} (q2)
-                   edge[loop above]    node        {$b$} (q3);
-        % \end{noindent}
-    \end{tikzpicture}
-    \caption{The DFA for \autoref{prob:5}}\label{fig:5:dfa}
-\end{figure}
 
 We have $G = \big(\{q_0, q_1, q_2, q_3\}, \{a, b\}, q_0, P \big)$ with production rules $P$ given
 by
@@ -111,6 +109,9 @@ by
     \[L = \{a^n b^m \mid n < 4, m \leq 4\} \]
 \end{quote}
 
+One solution might be
+\[r = (\lambda + a + aa + aaa) \cdot (\lambda + b + bb + bbb + bbbb) \]
+
 \section{}
 \begin{quote}
     Describe the language for the regular expressions
@@ -122,5 +123,32 @@ by
     Construct an NFA for the regular expression
     \[r = {(a + b)}^*\]
 \end{quote}
+
+\begin{enumerate}
+    \item $L = \{a, b\}$
+    \item $L = \{a, \lambda, b, bb, bbb, \dots \}$
+    \item $L = \{a, ab, abb, abbb, \dots, b, bc, bcc, bcc, \dots \}$
+\end{enumerate}
+
+An NFA for the regular expression $r$ is given below.
+
+\begin{center}
+    \begin{tikzpicture}[
+            ->,
+            > = stealth,
+            shorten > = 1pt,
+            auto,
+            node distance = 2.8cm,
+            on grid,
+            semithick
+        ]
+
+        \node[state, initial, accepting] (q0) {$q_0$};
+        \path (q0) edge[loop above] node {$a, b$} (q0);
+    \end{tikzpicture}
+\end{center}
+
+Note that the regular expression $r$ matches \textit{any} string in ${\{a, b\}}^*$, including
+$\lambda$.
 
 \end{document}
