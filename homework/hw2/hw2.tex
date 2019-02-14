@@ -90,6 +90,21 @@ disagrees with my current understanding that languages only contain finite strin
     \caption{The DFA for \autoref{prob:5}}\label{fig:5:dfa}
 \end{figure}
 
+We have $G = \big(\{q_0, q_1, q_2, q_3\}, \{a, b\}, q_0, P \big)$ with production rules $P$ given
+by
+\begin{align*}
+    q_0 & \to q_0 b   \\
+    q_0 & \to q_1 a   \\
+    q_1 & \to q_2 b   \\
+    q_1 & \to q_3 a   \\
+    q_2 & \to \lambda \\
+    q_2 & \to q_1 a   \\
+    q_2 & \to q_3 b   \\
+    q_3 & \to \lambda \\
+    q_3 & \to q_3 b   \\
+    q_3 & \to q_2 a
+\end{align*}
+
 \section{}
 \begin{quote}
     Give a regular expression for the language
