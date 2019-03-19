@@ -10,6 +10,70 @@
 
 \section{}
 \begin{quote}
-    Prove that $NP = P$.
+    Eliminate $B$ from the grammar with production rules
+    \begin{align*}
+        S & \to aSB \mid bB \\
+        B & \to aA \mid b
+    \end{align*}
+\end{quote}
+
+\section{}
+\begin{quote}
+    Transform the grammar with production rules
+    \begin{align*}
+        S & \to aSaa \mid A \\
+        A & \to abA \mid bb
+    \end{align*}
+    into Chomsky normal form.
+\end{quote}
+
+\section{}
+\begin{quote}
+    Transform the flowing\todo{following?}{} grammar into Chomsky normal form.
+    \begin{align*}
+        S & \to aSb \mid b
+    \end{align*}
+\end{quote}
+
+\section{}
+\begin{quote}
+    Find a context free grammar for the language of all palindromes with the alphabet $\Sigma = \{a, b\}$.
+\end{quote}
+
+\section{}
+\begin{quote}
+    Remove all unit-productions, useless productions, and $\lambda$-productions from the grammar with production rules
+    \begin{align*}
+        S & \to aA \mid aBB      \\
+        A & \to aaA \mid \lambda \\
+        B & \to bB \mid bbC      \\
+        C & \to B
+    \end{align*}
+\end{quote}
+
+\section{}
+\begin{quote}
+    Convert the grammar with productions
+    \begin{align*}
+        S & \to AB \mid aB       \\
+        A & \to abb \mid \lambda \\
+        B & \to bbA
+    \end{align*}
+    into Chomsky normal form, and draw the dependency graph for the grammar.
+\end{quote}
+
+\section{}
+\begin{quote}
+    Use the pumping lemma for context-free grammars to show that the language $L = \{a^p \mid p \text{ prime}\}$ is not context-free.\todo{Hint: Let $z = a^p = uvwxy$ with $p > m$.}
+
+    \begin{lemma}
+        Let $L$ be an infinite context-free language.
+        Then there is an $m \in \Z_+$ such that for all $z \in L$ with $\vert z \vert \geq m$, $z$ can be written in the form $z = uvwxy$ where the following properties hold.
+        \begin{align*}
+            \vert vx \vert  & \geq 1                    \\
+            \vert vwx \vert & \leq m                    \\
+            u v^k w x^k y   & \in L  & \forall k \geq 0
+        \end{align*}
+    \end{lemma}
 \end{quote}
 \end{document}
