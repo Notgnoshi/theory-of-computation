@@ -18,9 +18,10 @@
 \end{quote}
 
 The variable $B$ may be eliminated from the grammar by substituting the productions $B \to aA \mid b$ wherever $B$ is used in another production rule.
-Thus we have
+Thus we have\footnote{What should I do with the variable $A$?}
 \begin{align*}
-    S & \to aSaA \mid aSb \mid baA \mid bb
+    S & \to aSaA \mid aSb \mid baA \mid bb \\
+    A & \to \cloud[??]{9}{0.5cm}{0.5cm}
 \end{align*}
 
 \section{}
@@ -143,7 +144,64 @@ Then we're left with the productions
     \end{align*}
 \end{quote}
 
-\todoinline{Look up the order we need to do the removals in, and look up how to remove $\lambda$-productions.}
+We can remove undesirable productions in the order
+\begin{enumerate}
+    \item Remove $\lambda$-productions
+    \item Remove unit-productions
+    \item Remove useless productions
+\end{enumerate}
+
+First, consider the following example
+\begin{quote}
+    Remove $\lambda$-productions from the productions
+    \begin{align*}
+        S & \to aA             \\
+        A & \to a \mid \lambda
+    \end{align*}
+    We simply replace every occurrence of $A$ with its possible values.
+    \begin{align*}
+        S & \to aA \mid a \\
+        A & \to a
+    \end{align*}
+    Now consider the productions
+    \begin{align*}
+        S & \to aA              \\
+        A & \to aA \mid \lambda
+    \end{align*}
+    Here, we have
+    \begin{align*}
+        S & \to aA \mid a \\
+        A & \to aA \mid a
+    \end{align*}
+\end{quote}
+Returning to the problem at hand, removing the $\lambda$-productions from the productions
+\begin{align*}
+    S & \to aA \mid aBB      \\
+    A & \to aaA \mid \lambda \\
+    B & \to bB \mid bbC      \\
+    C & \to B
+\end{align*}
+yields
+\begin{align*}
+    S & \to aA \mid a \mid aBB \\
+    A & \to aaA \mid aa        \\
+    B & \to bB \mid bbC        \\
+    C & \to B
+\end{align*}
+
+We then remove the unit-production $C \to B$ to get
+\begin{align*}
+    S & \to aA \mid a \mid aBB \\
+    A & \to aaA \mid aa        \\
+    B & \to bB \mid bbB        \\
+    C & \to B
+\end{align*}
+and remove the now-useless production $C \to B$ to get the final simplified production rules.
+\begin{align*}
+    S & \to aA \mid a \mid aBB \\
+    A & \to aaA \mid aa        \\
+    B & \to bB \mid bbB
+\end{align*}
 
 \section{}
 \begin{quote}
@@ -155,7 +213,107 @@ Then we're left with the productions
     \end{align*}
     into Chomsky normal form, and draw the dependency graph for the grammar.
 \end{quote}
-\todoinline{Remove the $\lambda$-production, and look up how to build a dependency graph.}
+
+Before we can convert the productions into Chomsky normal form, we must simplify them according to the processes above.
+
+First, we remove the $\lambda$-production $A \to \lambda$:
+\begin{align*}
+    S & \to AB \mid B \mid aB \\
+    A & \to abb               \\
+    B & \to bbA \mid bb
+\end{align*}
+Second, we remove the unit-production $S \to B$:
+\begin{align*}
+    S & \to AB \mid bbA \mid bb \mid aB \\
+    A & \to abb                         \\
+    B & \to bbA \mid bb
+\end{align*}
+Third, we remove look for useless productions and find none.
+
+We can now proceed to convert the now simplified productions into Chomsky normal form.
+So we apply the first step of the algorithm, which yields
+\begin{align*}
+    S   & \to AB \mid B_b B_b A \mid B_b B_b \mid B_a B \\
+    A   & \to B_a B_b B_b                               \\
+    B   & \to B_b B_b A \mid B_b B_b                    \\
+    B_a & \to a                                         \\
+    B_b & \to b
+\end{align*}
+Then we apply the second step to trim each of the productions that are too large.
+This yields
+\begin{align*}
+    S   & \to AB \mid B_b C_1 \mid B_b B_b \mid B_a B \\
+    C_1 & \to B_b A                                   \\
+    A   & \to B_a C_2                                 \\
+    C_2 & \to B_b B_b                                 \\
+    B   & \to B_b C_3 \mid B_b B_b                    \\
+    C_3 & \to B_b A                                   \\
+    B_a & \to a                                       \\
+    B_b & \to b
+\end{align*}
+which are the simplified production rules in Chomsky normal form.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[
+            ->,
+            > = stealth,
+            shorten > = 1pt,
+            auto,
+            node distance = 2.8cm,
+            on grid,
+            semithick
+        ]
+        \node[state] (S) {$S$};
+        \node[state, below of=S] (B) {$B$};
+        \node[state, right of=B] (A) {$A$};
+
+        \path (S) edge (A);
+        \path (S) edge (B);
+        \path (B) edge (A);
+    \end{tikzpicture}
+    \caption{The dependency graph before normalization}\label{fig:dep-graph}
+\end{figure}
+
+The dependency graph for the grammar before the normalization is shown in \autoref{fig:dep-graph}.
+Compare this with the dependency graph for the grammar after the normalization shown in \autoref{fig:dep-graph-fuck}.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[
+            ->,
+            > = stealth,
+            shorten > = 1pt,
+            auto,
+            node distance = 2.8cm,
+            on grid,
+            semithick
+        ]
+        \node[state] (S) {$S$};
+        \node[state, below left of=S] (B) {$B$};
+        \node[state, below right of=B] (C3) {$C_3$};
+        \node[state, right of=C3] (C1) {$C_1$};
+        \node[state, below left of=C3] (A) {$A$};
+        \node[state, below left of=A] (Ba) {$B_a$};
+        \node[state, below right of=A] (C2) {$C_2$};
+        \node[state, right of=C2] (Bb) {$B_b$};
+
+        \path (S) edge (C1);
+        \path (S) edge (A);
+        \path (S) edge (B);
+        \path (A) edge (C2);
+        \path (A) edge (Ba);
+        \path (B) edge (C3);
+        \path (B) edge (Ba);
+        \path (B) edge[bend right=15] (Bb);
+        \path (C1) edge (Bb);
+        \path (C1) edge (A);
+        \path (C2) edge (Bb);
+        \path (C3) edge (Bb);
+        \path (C3) edge (A);
+    \end{tikzpicture}
+    \caption{The dependency graph after normalization}\label{fig:dep-graph-fuck}
+\end{figure}
 
 \section{}
 \begin{quote}
