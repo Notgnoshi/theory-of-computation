@@ -323,13 +323,73 @@ Compare this with the dependency graph for the grammar after the normalization s
 
 \begin{lemma}
     Let $L$ be an infinite context-free language.
-    Then there is an $m \in \Z_+$ such that for all $z \in L$ with $\vert z \vert \geq m$, $z$ can be written in the form $z = uvwxy$ where the following properties hold.
+    Then there is an $m \in \Z_+$ such that for all $w \in L$ with $\vert w \vert \geq m$, $w$ can be written in the form $w = uvxyz$ where the following properties hold.
     \begin{align*}
-        \vert vx \vert  & \geq 1                    \\
-        \vert vwx \vert & \leq m                    \\
-        u v^k w x^k y   & \in L  & \forall k \geq 0
+        \vert vy \vert  & \geq 1                    \\
+        \vert vxy \vert & \leq m                    \\
+        u v^k x y^k z   & \in L  & \forall k \geq 0
     \end{align*}
 \end{lemma}
 
-\todoinline{\dots}
+This was a problem I used before the last exam to study the pumping lemma for regular languages.
+So I include two proofs --- one that the language $L$ cannot be regular --- and one that $L$ cannot be context-free.
+However, note that a nonregular language \textit{can} be context-free.
+Thus the first proof is not sufficient.
+
+\begin{proof}
+    We wish to show that $L = \{a^p \mid p \text{ prime}\}$ is not regular.
+    So suppose by way of contradiction that $L$ \textit{is} regular.
+    Then the pumping lemma for infinite regular languages holds for some $m$.
+
+    Now consider $w \in L$ given by $w = a^{m + r}$.
+    Then $w$ can be decomposed into
+    \begin{align*}
+        w & = xyz                                                                               \\
+          & = \underbrace{\overbrace{a \cdots a}^m}_{xy}\underbrace{\overbrace{a \cdots a}^r}_z \\
+          & = a^{m - k} a^k a^r
+    \end{align*}
+    where $y = a^k$.
+
+    But now consider\footnote{Coming up with the right value for $i$ took several hours along with several pages of failed attempts.} $w_i = xy^i z$ where $i = m + r + 1$
+    \begin{align*}
+        w_i & = xy^i z                         \\
+            & = a^{m - k} {(a^k)}^i a^r        \\
+            & = a^{m - k} a^{k(m + r + 1)} a^r \\
+            & = a^{(k + 1)(m + r)}
+    \end{align*}
+    which is \textit{not} in $L$, because $(k + 1)(m + r)$ is clearly\texttrademark{} not prime.
+    This is a contradiction, and thus $L$ is not regular.
+\end{proof}
+
+However, as noted above, showing that a language is not regular does not imply that it is context-free.
+The proof above is worked through in order to inspire the following proof.
+
+\begin{proof}
+    We wish to show that $L = \{a^p \mid p \text{ prime}\}$ is not context-free.
+    So suppose by way of contradiction that $L$ \textit{is} context-free.
+    Then the Pumping Lemma for infinite context-free languages holds for some $m$.
+
+    So consider some $w \in L$ given by $w = a^p$, where $p \geq m$ is prime.
+    \begin{align*}
+        w & = a^p   \\
+          & = uvxyz
+    \end{align*}
+    with $\vert vy \vert \geq 1$, and $\vert vxy \vert \leq m$.
+    Note also that $\vert w \vert = p$.
+
+    How consider $w_i = u v^i x y^i z$ with $i = p + 1$.
+    \begin{align*}
+        w_i & = u v^{p + 1} x y^{p + 1} z \\
+            & = u v v^p x y y^p z
+    \end{align*}
+    but then
+    \begin{align*}
+        \vert w_i \vert & = \vert u v v^p x y y^p z \vert                     \\
+                        & = \vert w \vert + \vert v^p \vert + \vert y^p \vert \\
+                        & = p + p + p                                         \\
+                        & = 3p
+    \end{align*}
+    Thus $w_i \notin L$, because $3p$ is not prime.
+    This is a contradiction, and therefore $L$ cannot be context-free.
+\end{proof}
 \end{document}
