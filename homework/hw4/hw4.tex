@@ -8,6 +8,30 @@
 \begin{document}
 \maketitle
 
+The following problems forbid using Example 11.3. Before we can proceed, we must make several definitions.
+
+\begin{defn}
+    A grammar $G = (V, T, S, P)$ is said to be \textbf{linear} if every production is either right-linear or left-linear. That is, every production has one of the following forms
+    \begin{align*}
+        A & \to xB \\
+        A & \to Bx \\
+        A & \to x
+    \end{align*}
+    For $A$, $B$, in $V$ and $x \in T^*$.
+\end{defn}
+
+\begin{defn}
+    A grammar $G = (V, T, S, P)$ is \textbf{context-free} if all productions in $P$ have the form \[A \to x\] where $A \in V$ and $x \in {(V \cup T)}^*$.
+\end{defn}
+
+\begin{defn}
+    A context-free language $L$ is said to be \textbf{linear} if there exists a linear context-free grammar $G$ such that $L = L(G)$.
+\end{defn}
+
+\begin{defn}
+    A language $L$ is said to be \textbf{deterministic context-free} if and only if there exists a deterministic pushdown accepter $M$ such that $L = L(M)$.
+\end{defn}
+
 \section{}
 \begin{quote}
     Find two examples of languages that are linear but not deterministic context free.
