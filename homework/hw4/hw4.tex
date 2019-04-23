@@ -8,16 +8,10 @@
 \begin{document}
 \maketitle
 
-The following problems forbid using Example 11.3. Before we can proceed, we must make several definitions.
+The following problems forbid using the languages given in Example 11.3. Before we can proceed, we must make several definitions.
 
 \begin{defn}
-    A grammar $G = (V, T, S, P)$ is said to be \textbf{linear} if every production is either right-linear or left-linear. That is, every production has one of the following forms
-    \begin{align*}
-        A & \to xB \\
-        A & \to Bx \\
-        A & \to x
-    \end{align*}
-    For $A$, $B$, in $V$ and $x \in T^*$.
+    A grammar $G = (V, T, S, P)$ is said to be \textbf{linear} if every production has at most one variable on the right hand side.
 \end{defn}
 
 \begin{defn}
@@ -37,23 +31,16 @@ The following problems forbid using Example 11.3. Before we can proceed, we must
     Find two examples of languages that are linear but not deterministic context free.
 \end{quote}
 
-$L = \{ww^R\}$ is nondeterministic, but linear.\todo{Show that it's linear.}
+The book states that the language $L = \{ww^R\}$ is nondeterministic, but a linear grammar for it is given in Example 5.1.
 
-\todoinline{Find another language and show that it is linear.}
+Using the argument made in Example 7.11, we can claim that $L = \{a^n b^n \} \cup \{a^{3n} b^n\}$ is clearly linear but not deterministic.
 
 \section{}
 \begin{quote}
     Find two examples of languages that are deterministic context free but not linear.
 \end{quote}
 
-The following three languages are not linear.
-\begin{align}
-    L & = \{ a^n b^n a^m b^m \mid n \geq 0, m \geq 0 \}\label{eq:L-cat-L} \\
-    L & = \{ w \in {\{a, b\}}^* \mid n_a(w) \leq n_b(w) \}                \\
-    L & = \{ w \in {\{a, b, c\}}^* \mid n_a(w) + n_b(w) = n_c(w) \}
-\end{align}
+A proof is given in the book that the language $L = \{ a^n b^n a^m b^m \mid n \geq 0, m \geq 0 \}$ is nonlinear yet deterministic context free. Notice that $L$ is the language $\{a^n b^n \mid n \geq 0 \}$ concatenated with itself.
 
-Notice that \autoref{eq:L-cat-L} is the linear language $L = \{a^n b^n \mid n \geq 0 \}$ concatenated with itself.
-
-\todoinline{Show that these languages are deterministic context free.}
+A proof is also given in the book that the language of properly matched brackets given by the grammar $S \to aSa \mid SS \mid \lambda$ is deterministic context-free and nonlinear.
 \end{document}
